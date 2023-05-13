@@ -10,6 +10,8 @@
     <p th:text="${user.getName()}">VALUE</p>
     <p th:text="${user.getSurname()}">VALUE</p>
     <p th:text="${user.getAge()}">VALUE</p>
+    <p th:text="${user.getRoles()}">VALUE</p>
+    <p th:text="${user.getUsername()}">VALUE</p>
     <a href="/admin/users">
         <button>Назад</button>
     </a>
@@ -20,5 +22,7 @@
         <button type="submit" style="background-color: #b77070">Удалить</button>
     </a>
 </div>
+<hr>
+<div th:insert="~{users/logout :: 'logout'}"></div>
 </body>
 </html>

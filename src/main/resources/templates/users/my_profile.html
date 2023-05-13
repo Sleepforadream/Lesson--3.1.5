@@ -11,5 +11,7 @@
     <p th:text="${user.getSurname()}">VALUE</p>
     <p th:text="${user.getAge()}">VALUE</p>
 </div>
+<hr>
+<div th:insert="~{users/logout :: 'logout'}"></div>
 </body>
 </html>

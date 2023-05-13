@@ -1,10 +1,12 @@
-package com.example.PP_3_1_2_spring_project_boot.service;
+package ru.kata.spring.boot_security.demo.service;
 
-import com.example.PP_3_1_2_spring_project_boot.model.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     void addUser(User user);
 
@@ -15,4 +17,8 @@ public interface UserService {
     void updateUser(Long id, User user);
 
     void deleteUser(Long userId);
+
+    User getUserByUsername(String username);
+
+    UserDetails loadUserByUsername(String username);
 }
