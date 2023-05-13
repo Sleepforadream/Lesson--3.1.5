@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New User</title>
+</head>
+<body>
+<!--<form action="/admin/create" method="post" class="form-new-user">-->
+<!--    <fieldset>-->
+<!--        <legend>Данные нового пользователя</legend>-->
+<!--        <br>-->
+<!--        <div class="form-new-user">-->
+<!--            <label for="username">Введите логин: </label>-->
+<!--            <input type="text" maxlength="45" placeholder="Логин" name="username" id="username" required>-->
+<!--        </div>-->
+<!--        <br>-->
+<!--        <div class="form-new-user">-->
+<!--            <label for="password">Введите пароль: </label>-->
+<!--            <input type="password" maxlength="45" placeholder="Пароль" name="password" id="password" required>-->
+<!--        </div>-->
+<!--        <br>-->
+<!--        <div class="form-new-user">-->
+<!--            <label for="name">Введите своё имя: </label>-->
+<!--            <input type="text" maxlength="45" placeholder="Ваше имя" name="name" id="name" required>-->
+<!--        </div>-->
+<!--        <br>-->
+<!--        <div class="form-new-user">-->
+<!--            <label for="surname">Введите свою фамилию: </label>-->
+<!--            <input type="text" maxlength="45" placeholder="Ваша фамилия" name="surname" id="surname">-->
+<!--        </div>-->
+<!--        <br>-->
+<!--        <div class="form-new-user">-->
+<!--            <label for="age">Введите свой возраст: </label>-->
+<!--            <input type="number" max="100" placeholder="Сколько Вам лет?" name="age" id="age">-->
+<!--        </div>-->
+<!--        <br>-->
+<!--        &lt;!&ndash;        <label>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <select size="3" multiple="multiple" name="roles" id="roles">&ndash;&gt;-->
+<!--        &lt;!&ndash;                <option disabled>Roles:</option>&ndash;&gt;-->
+<!--        &lt;!&ndash;                <option value="ROLE_ADMIN">ADMIN</option>&ndash;&gt;-->
+<!--        &lt;!&ndash;                <option selected value="ROLE_COMMON">COMMON</option>&ndash;&gt;-->
+<!--        &lt;!&ndash;            </select>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </label>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <br>&ndash;&gt;-->
+<!--        <div class="form-new-user">-->
+<!--            <input type="submit" value="Зарегистрировать">-->
+<!--        </div>-->
+<!--    </fieldset>-->
+
+<form th:action="@{/admin/user/{id}/update(id=${updatableUser.getId()})}" method="post" class="form-example">
+    <fieldset>
+        <legend>Данные нового пользователя</legend>
+        <br>
+        <div class="form-example">
+            <label for="username">Никнейм: </label>
+            <input type="text" maxlength="45" th:value="${updatableUser.getUsername()}" name="username" id="username" required>
+        </div>
+        <br>
+        <div class="form-example">
+            <label for="password">Пароль: </label>
+            <input type="password" maxlength="45" th:value="${updatableUser.getPassword()}" name="password" id="password" required>
+        </div>
+        <br>
+        <div class="form-example">
+            <label for="name">Имя: </label>
+            <input type="text" maxlength="45" th:value="${updatableUser.getName()}" name="name" id="name" required>
+        </div>
+        <br>
+        <div class="form-example">
+            <label for="surname">Фамилия: </label>
+            <input type="text" maxlength="45" th:value="${updatableUser.getSurname()}" name="surname" id="surname">
+        </div>
+        <br>
+        <div class="form-example">
+            <label for="age">Возраст: </label>
+            <input type="number" max="100" th:value="${updatableUser.getAge()}" name="age" id="age">
+        </div>
+        <br>
+        <div class="form-example">
+            <input type="submit" value="Обновить">
+        </div>
+    </fieldset>
+</form>
+</body>
+</html>

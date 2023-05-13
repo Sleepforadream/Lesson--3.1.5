@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New User</title>
+</head>
+<body>
+<form action="/admin/create" method="post" class="form-new-user">
+    <fieldset>
+        <legend>Данные нового пользователя</legend>
+        <br>
+        <div class="form-new-user">
+            <label for="username">Введите логин: </label>
+            <input type="text" maxlength="45" placeholder="Логин" name="username" id="username" required>
+        </div>
+        <br>
+        <div class="form-new-user">
+            <label for="password">Введите пароль: </label>
+            <input type="password" maxlength="45" placeholder="Пароль" name="password" id="password" required>
+        </div>
+        <br>
+        <div class="form-new-user">
+            <label for="name">Введите своё имя: </label>
+            <input type="text" maxlength="45" placeholder="Ваше имя" name="name" id="name" required>
+        </div>
+        <br>
+        <div class="form-new-user">
+            <label for="surname">Введите свою фамилию: </label>
+            <input type="text" maxlength="45" placeholder="Ваша фамилия" name="surname" id="surname">
+        </div>
+        <br>
+        <div class="form-new-user">
+            <label for="age">Введите свой возраст: </label>
+            <input type="number" max="100" placeholder="Сколько Вам лет?" name="age" id="age">
+        </div>
+        <br>
+<!--        <label>-->
+<!--            <select size="3" multiple="multiple" name="roles" id="roles">-->
+<!--                <option disabled>Roles:</option>-->
+<!--                <option value="ROLE_ADMIN">ADMIN</option>-->
+<!--                <option selected value="ROLE_COMMON">COMMON</option>-->
+<!--            </select>-->
+<!--        </label>-->
+<!--        <br>-->
+        <div class="form-new-user">
+            <input type="submit" value="Зарегистрировать">
+        </div>
+    </fieldset>
+</form>
+</body>
+</html>
