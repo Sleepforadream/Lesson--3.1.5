@@ -1,16 +1,13 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,15 +20,32 @@ public class RoleServiceImpl implements RoleService {
         this.roleRepository = roleRepository;
     }
 
-    @Transactional
     @Override
+    public Set<Role> getAllRoles() {
+        return new HashSet<>(roleRepository.findAll());
+    }
+
+    @Override
+    public Role getRoleByName(String name) {
+        return roleRepository.findByRole(name);
+    }
+
+    @Override
+    public Set<Role> parseArrayToSet(String[] roleNames) {
+        return Arrays.stream(roleNames).map(this::getRoleByName).collect(Collectors.toSet());
+    }
+
+    @Override
+    @Transactional
     public void addRole(Role role) {
         roleRepository.save(role);
     }
 
     @Override
-    public List<Role> getAllRoles() {
-        return roleRepository.findAll();
+    @Transactional
+    public void updateRole(Long id, Role newSwitchRole) {
+        newSwitchRole.setId(id);
+        roleRepository.save(newSwitchRole);
     }
 
     @Override
@@ -39,21 +53,9 @@ public class RoleServiceImpl implements RoleService {
         return roleRepository.findById(id).get();
     }
 
-    @Transactional
     @Override
-    public void updateRole(Long id, Role newSwitchRole) {
-        newSwitchRole.setId(id);
-        roleRepository.save(newSwitchRole);
-    }
-
     @Transactional
-    @Override
     public void deleteRole(Long roleId) {
         roleRepository.delete(getRoleById(roleId));
-    }
-
-    @Override
-    public List<Role> parseArrayToListRoles(String[] roles) {
-        return Arrays.stream(roles).map(Role::new).toList();
     }
 }

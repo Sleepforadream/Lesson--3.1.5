@@ -4,33 +4,37 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-@EqualsAndHashCode
-@Setter
 @Getter
+@Setter
 public class Role implements GrantedAuthority {
     public Role() {}
-
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "role")
-    private String roleName;
+    private String role; /*----------------------------> не пойму почему работает только когда поле названо role */
 
-    @ManyToMany(mappedBy = "roles")
-    private List<User> users;
+    public Role(Long id) {
+        this.id = id;
+    }
 
-    public Role(String roleName) {
-        this.roleName = roleName;
+    public Role(String role) {
+        this.role = role;
     }
 
     @Override
     public String getAuthority() {
-        return getRoleName();
+        return getRole();
+    }
+
+    @Override
+    public String toString() {
+        return role;
     }
 }

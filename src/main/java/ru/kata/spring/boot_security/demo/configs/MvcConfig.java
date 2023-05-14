@@ -9,9 +9,9 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("profile");
-    }
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/").setViewName("users/profile");
+//    }
 
     @Bean
     public ClassLoaderTemplateResolver templateResolver() {
