@@ -1,28 +1,22 @@
-package ru.kata.spring.boot_security.demo.controller;
+package ru.kata.spring.boot_security.demo.configs;
 
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 
-import java.awt.*;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyEditor;
 import java.util.HashSet;
 import java.util.Set;
 
 @Component
 public class Converters {
+    private final RoleRepository roleRepository;
 
     @Autowired
     public Converters(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
-
-    private final RoleRepository roleRepository;
 
     @Component
     public class StringsArrayToRoleConverter implements Converter<String[], Set<Role>> {
@@ -50,4 +44,3 @@ public class Converters {
         }
     }
 }
-

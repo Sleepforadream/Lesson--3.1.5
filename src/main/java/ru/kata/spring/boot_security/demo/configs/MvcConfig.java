@@ -6,10 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import ru.kata.spring.boot_security.demo.controller.Converters;
-import ru.kata.spring.boot_security.demo.repository.RoleRepository;
-
-import java.util.HashMap;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
@@ -27,13 +23,6 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Bean
     public ClassLoaderTemplateResolver templateResolver() {
-        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setCheckExistence(true);
-        return templateResolver;
-    }
-
-    @Bean
-    public ClassLoaderTemplateResolver templateResolver2() {
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setCheckExistence(true);
         return templateResolver;

@@ -46,11 +46,7 @@ public class AdminController {
 
     @PostMapping("users/create")
     public String createUser(@ModelAttribute("user") User user, Model model) {
-//        User user = new User(username, password, name, surname, age);
-//        user.setRoles(roleService.parseArrayToSet(user));
         userService.addUser(user);
-
-
         model.addAttribute("createdUser", user);
         return "users/success_create";
     }
@@ -62,16 +58,7 @@ public class AdminController {
     }
 
     @PostMapping("/user/{id}/update")
-    public String updateUser(@RequestParam("username") String username,
-                             @RequestParam(value = "age", required = false) Integer age,
-                             @RequestParam(value = "name", required = false) String name,
-                             @RequestParam(value = "surname", required = false) String surname,
-                             @RequestParam(value = "password") String password,
-                             @RequestParam(value = "roles") String[] roles,
-                             @PathVariable("id") Long id,
-                             Model model) {
-        User user = new User(username, password, name, surname, age);
-        user.setRoles(roleService.parseArrayToSet(roles));
+    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") Long id, Model model) {
         userService.updateUser(id, user);
         model.addAttribute("updatedUser", user);
         return "users/success_update";
