@@ -11,12 +11,12 @@ import java.security.Principal;
 
 @Controller
 @RequestMapping("/user")
-public class UsersController {
+public class UserController {
 
     private final UserService userService;
 
     @Autowired
-    public UsersController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 

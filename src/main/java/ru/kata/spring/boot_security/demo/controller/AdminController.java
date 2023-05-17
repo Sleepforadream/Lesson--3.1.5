@@ -3,20 +3,26 @@ package ru.kata.spring.boot_security.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Set;
+
 @Controller
 @RequestMapping("/admin")
-public class AdminsController {
+public class AdminController {
 
     private final UserService userService;
     private final RoleService roleService;
 
     @Autowired
-    public AdminsController(UserService userService, RoleService roleService) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
@@ -39,17 +45,12 @@ public class AdminsController {
     }
 
     @PostMapping("users/create")
-    public String createUser(@RequestParam("username") String username,
-                             @RequestParam (value = "age",required = false) Integer age,
-                             @RequestParam(value = "name",required = false) String name,
-                             @RequestParam(value = "surname",required = false) String surname,
-                             @RequestParam(value = "password") String password,
-                             @RequestParam(value = "roles") String [] roles,
-                             Model model) {
-
-        User user = new User(username,password,name,surname,age);
-        user.setRoles(roleService.parseArrayToSet(roles));
+    public String createUser(@ModelAttribute("user") User user, Model model) {
+//        User user = new User(username, password, name, surname, age);
+//        user.setRoles(roleService.parseArrayToSet(user));
         userService.addUser(user);
+
+
         model.addAttribute("createdUser", user);
         return "users/success_create";
     }
@@ -62,14 +63,14 @@ public class AdminsController {
 
     @PostMapping("/user/{id}/update")
     public String updateUser(@RequestParam("username") String username,
-                             @RequestParam (value = "age",required = false) Integer age,
-                             @RequestParam(value = "name",required = false) String name,
-                             @RequestParam(value = "surname",required = false) String surname,
+                             @RequestParam(value = "age", required = false) Integer age,
+                             @RequestParam(value = "name", required = false) String name,
+                             @RequestParam(value = "surname", required = false) String surname,
                              @RequestParam(value = "password") String password,
-                             @RequestParam(value = "roles") String [] roles,
+                             @RequestParam(value = "roles") String[] roles,
                              @PathVariable("id") Long id,
                              Model model) {
-        User user = new User(username,password,name,surname,age);
+        User user = new User(username, password, name, surname, age);
         user.setRoles(roleService.parseArrayToSet(roles));
         userService.updateUser(id, user);
         model.addAttribute("updatedUser", user);

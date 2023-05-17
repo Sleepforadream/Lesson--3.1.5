@@ -13,12 +13,14 @@
         <br>
         <div class="form-example">
             <label for="username">Никнейм: </label>
-            <input type="text" maxlength="45" th:value="${updatableUser.getUsername()}" name="username" id="username" required>
+            <input type="text" maxlength="45" th:value="${updatableUser.getUsername()}" name="username" id="username"
+                   required>
         </div>
         <br>
         <div class="form-example">
             <label for="password">Пароль: </label>
-            <input type="password" maxlength="45" th:value="${updatableUser.getPassword()}" name="password" id="password" required>
+            <input type="password" maxlength="45" th:value="${updatableUser.getPassword()}" name="password"
+                   id="password" required>
         </div>
         <br>
         <div class="form-example">
@@ -37,30 +39,32 @@
         </div>
         <br>
         <label>
-            <th:block th:switch="${updatableUser.getRoles().toString()}">
-                <div th:case="'[ROLE_ADMIN, ROLE_COMMON]'">
-                    <select size="3" name="roles" multiple id="roles" th:autofocus="${updatableUser.roles}">
-                        <option disabled>Roles:</option>
-                        <option selected value="ROLE_ADMIN">ADMIN</option>
-                        <option selected value="ROLE_COMMON">COMMON</option>
-                    </select>
-                </div>
-                <div th:case="'[ROLE_ADMIN]'">
-                    <select size="3" name="roles" multiple id="roles" th:autofocus="${updatableUser.roles}">
-                        <option disabled>Roles:</option>
-                        <option selected value="ROLE_ADMIN">ADMIN</option>
-                        <option value="ROLE_COMMON">COMMON</option>
-                    </select>
-                </div>
-                <div th:case="'[ROLE_COMMON]'">
-                    <select size="3" name="roles" multiple id="roles" th:autofocus="${updatableUser.roles}">
-                        <option disabled>Roles:</option>
-                        <option value="ROLE_ADMIN">ADMIN</option>
-                        <option selected value="ROLE_COMMON">COMMON</option>
-                    </select>
-                </div>
-            </th:block>
+            <select size="3" name="roles" multiple id="roles" th:autofocus="${updatableUser.roles}"
+                    th:switch="${updatableUser.roles.toString()}">
+                <th:block></th:block>
+                <th:block th:case="'[ROLE_ADMIN, ROLE_COMMON]'">
+                    <option disabled>Roles:</option>
+                    <option selected value="ROLE_ADMIN">ADMIN</option>
+                    <option selected value="ROLE_COMMON">COMMON</option>
+                </th:block>
+                <th:block th:case="'[ROLE_COMMON, ROLE_ADMIN]'">
+                    <option disabled>Roles:</option>
+                    <option selected value="ROLE_ADMIN">ADMIN</option>
+                    <option selected value="ROLE_COMMON">COMMON</option>
+                </th:block>
+                <th:block th:case="'[ROLE_ADMIN]'">
+                    <option disabled>Roles:</option>
+                    <option selected value="ROLE_ADMIN">ADMIN</option>
+                    <option value="ROLE_COMMON">COMMON</option>
+                </th:block>
+                <th:block th:case="'[ROLE_COMMON]'">
+                    <option disabled>Roles:</option>
+                    <option value="ROLE_ADMIN">ADMIN</option>
+                    <option selected value="ROLE_COMMON">COMMON</option>
+                </th:block>
+            </select>
         </label>
+        <br>
         <div class="form-example">
             <input type="submit" value="Обновить">
         </div>
