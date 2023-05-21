@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>All Users</title>
-</head>
+<head th:replace="main/main :: htmlhead"><title>All users</title></head>
 <body>
+<header th:replace="fragments/header :: header"></header>
+
 <div>
     <th:block th:each="usr : ${users}">
         <a th:href="@{/admin/user/{id}(id=${usr.getId()})}"

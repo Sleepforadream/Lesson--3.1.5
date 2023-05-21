@@ -50,13 +50,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().disable()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/", "/css/**", "/js/**", "/webjars/**","/auth/login", "/error").permitAll()
                 .antMatchers("/user/**").hasAnyRole("COMMON","ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .successHandler(successUserHandler)
+                .loginPage("/auth/login")
+                .loginProcessingUrl("/process_login")
+                .failureUrl("/auth/login?error")
                 .and()
-                .logout().logoutSuccessUrl("/");
+                .logout()
+                .logoutSuccessUrl("/auth/login");
     }
 }
