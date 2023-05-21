@@ -1,20 +1,15 @@
-package ru.kata.spring.boot_security.demo.controller;
+package ru.kata.spring.web.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import ru.kata.spring.boot_security.demo.model.Role;
-import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.RoleService;
-import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.web.project.model.User;
+import ru.kata.spring.web.project.service.RoleService;
+import ru.kata.spring.web.project.service.UserService;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Set;
-
-@Controller
+@Component
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -30,21 +25,34 @@ public class AdminController {
     @GetMapping("/users")
     public String viewAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
-        return "users/all_users";
+
+        model.addAttribute("allRoles", roleService.getAllRoles());
+
+//        model.addAttribute("showUserProfile", model.containsAttribute("user") &&
+//                        (model.getAttribute("user")) == null);
+//
+//        model.addAttribute("showNewUserForm", model.containsAttribute("user") &&
+//                        (model.getAttribute("user")) != null);
+//
+//        if (!model.containsAttribute("user")) {
+//            model.addAttribute("user", new User());
+//        }
+
+        return "users/admin";
     }
 
-    @GetMapping("user/{id}")
+    @GetMapping("/user/{id}")
     public String viewUser(@PathVariable Long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "users/profile";
     }
 
-    @GetMapping("users/create")
+    @GetMapping("/users/create")
     public String toCreateUser() {
         return "users/create";
     }
 
-    @PostMapping("users/create")
+    @PostMapping("/fragments/user-addform")
     public String createUser(@ModelAttribute("user") User user, Model model) {
         userService.addUser(user);
         model.addAttribute("createdUser", user);

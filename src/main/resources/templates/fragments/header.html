@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      th:with="lang=${#locale.language}"
-      th:lang="${lang}">
-
 <header class="container-fluid d-flex flex-row align-items-center justify-content-between p-3 bg-dark text-white">
-
-    <div>
+    <div class="header-title">
         <b sec:authentication="name"></b> with roles:
         <th:block th:each="role : ${#authentication.authorities}">
-            &nbsp;<span th:text="${role.getAuthority()}"></span>
+            &nbsp;<span th:text="${role.getAuthority().toString()}"></span>
         </th:block>
     </div>
-
-    <div>
-        <a class="text-light" th:href="@{/logout}">Logout</a>
+    <div class="header-logout">
+        <a class="text-white-50" th:href="@{/logout}">Logout</a>
     </div>
-
 </header>

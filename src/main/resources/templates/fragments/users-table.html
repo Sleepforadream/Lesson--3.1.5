@@ -2,10 +2,10 @@
   <thead>
   <tr class="border-top">
     <th scope="col">ID</th>
-    <th scope="col">First name</th>
-    <th scope="col">Last name</th>
+    <th scope="col">First Name</th>
+    <th scope="col">Last Name</th>
     <th scope="col">Age</th>
-    <th scope="col">E-mail</th>
+    <th scope="col">Email</th>
     <th scope="col">Roles</th>
     <th scope="col">Edit</th>
     <th scope="col">Delete</th>
@@ -14,14 +14,14 @@
   <tbody>
   <tr class="border-top bg-light" th:each="user, rowStat : ${users}"
       th:classappend="${rowStat.count % 2 != 0 ? 'table-secondary' : 'table-light'}">
-    <td th:text="${user.id}"/>
-    <td th:text="${user.firstName}"/>
-    <td th:text="${user.lastName}"/>
-    <td th:text="${user.age}"/>
-    <td th:text="${user.email}"/>
+    <td th:text="${user.id}"></td>
+    <td th:text="${user.name}"></td>
+    <td th:text="${user.surname}"></td>
+    <td th:text="${user.age}"></td>
+    <td th:text="${user.username}"></td>
     <td>
       <th:block th:each="role : ${user.getRoles()}">
-        &nbsp;<span th:text="${role.name}"/>
+        <span th:text="${role.toString()} + ' '"></span>
       </th:block>
     </td>
     <td>

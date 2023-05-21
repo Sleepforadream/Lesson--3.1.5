@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.model;
+package ru.kata.spring.web.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +34,6 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String toString() {
-        return role;
+        return role.replace("ROLE_","");
     }
 }

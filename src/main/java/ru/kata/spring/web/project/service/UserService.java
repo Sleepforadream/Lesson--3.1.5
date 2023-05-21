@@ -1,9 +1,9 @@
-package ru.kata.spring.boot_security.demo.service;
+package ru.kata.spring.web.project.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import ru.kata.spring.boot_security.demo.model.Role;
-import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.web.project.model.Role;
+import ru.kata.spring.web.project.model.User;
 
 import java.util.List;
 import java.util.Set;

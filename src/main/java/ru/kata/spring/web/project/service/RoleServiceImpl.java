@@ -1,10 +1,10 @@
-package ru.kata.spring.boot_security.demo.service;
+package ru.kata.spring.web.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.boot_security.demo.model.Role;
-import ru.kata.spring.boot_security.demo.repository.RoleRepository;
+import ru.kata.spring.web.project.repository.RoleRepository;
+import ru.kata.spring.web.project.model.Role;
 
 import java.util.Arrays;
 import java.util.HashSet;

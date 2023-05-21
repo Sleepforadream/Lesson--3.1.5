@@ -1,6 +1,6 @@
-package ru.kata.spring.boot_security.demo.service;
+package ru.kata.spring.web.project.service;
 
-import ru.kata.spring.boot_security.demo.model.Role;
+import ru.kata.spring.web.project.model.Role;
 
 import java.util.Set;
 

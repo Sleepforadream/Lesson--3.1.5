@@ -2,12 +2,60 @@ body {
     background-color: #ffffff;
 }
 
-.login-form {
-    margin-bottom: 0;
+.bg-white {
+    background-color: #fcfcfc!important;
 }
 
-.password-form {
-    margin-bottom: 10px;
+.header-title {
+    font-size: 20px;
+}
+
+.font-size-navbar {
+    font-size: 17px;
+}
+
+.border-top-right-radius-5 {
+    border-top-right-radius: 5px!important;
+}
+
+.border-top-radius-5 {
+    border-top-left-radius: 5px!important;
+    border-top-right-radius: 5px!important;
+}
+
+.border-bottom-radius-5 {
+    border-bottom-left-radius: 5px!important;
+    border-bottom-right-radius: 5px!important;
+}
+
+.width-navbar {
+    width: 18.5%;
+}
+
+.navbar-button {
+    margin-bottom: 1px;
+    height: 44px;
+    border-top-left-radius: 0!important;
+    border-top-right-radius: 5px!important;
+    border-bottom-right-radius: 5px!important;
+}
+
+
+.btn-group-vertical {
+    width: 100%;
+}
+
+.header-logout {
+    font-size: 18px;
+}
+
+.btn-light {
+    background-color: #fcfcfc!important;
+    color: #007bff;
+}
+
+.panel-title {
+    font-size: 42px!important;
 }
 
 .form-signin {
@@ -19,7 +67,7 @@ body {
 .form-signin .form-signin-heading,
 
 .form-signin .checkbox {
-    margin-bottom: 15px;
+    font-weight: 700;
 }
 
 .form-signin-heading {
@@ -28,7 +76,7 @@ body {
 }
 
 .form-signin .checkbox {
-    font-weight: 400;
+font-weight: 400;
 }
 
 .form-signin .form-control {

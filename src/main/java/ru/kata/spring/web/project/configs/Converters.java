@@ -1,10 +1,10 @@
-package ru.kata.spring.boot_security.demo.configs;
+package ru.kata.spring.web.project.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import ru.kata.spring.boot_security.demo.model.Role;
-import ru.kata.spring.boot_security.demo.repository.RoleRepository;
+import ru.kata.spring.web.project.repository.RoleRepository;
+import ru.kata.spring.web.project.model.Role;
 
 import java.util.HashSet;
 import java.util.Set;

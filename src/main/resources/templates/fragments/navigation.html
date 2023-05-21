@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div th:fragment="navigation (currentPage)" class="bg-white width-navbar">
+    <nav class="btn-group-vertical mt-3 mb-3">
+        <a sec:authorize="hasRole('ADMIN')" type="button"
+           class="btn pr-5 pt-2 text-left font-size-navbar navbar-button"
+           th:classappend="${currentPage} == 'admin' ? btn-primary : btn-light"
+           th:href="@{/admin/users}">Admin</a>
+        <a type="button" class="btn pt-2 pr-5 text-left font-size-17 navbar-button"
+           th:classappend="${currentPage} == 'user' ? btn-primary : btn-light"
+           th:href="@{/user}">User</a>
+    </nav>
+</div>

@@ -42,22 +42,22 @@
             <select size="3" name="roles" multiple id="roles" th:autofocus="${updatableUser.roles}"
                     th:switch="${updatableUser.roles.toString()}">
                 <th:block></th:block>
-                <th:block th:case="'[ROLE_ADMIN, ROLE_COMMON]'">
+                <th:block th:case="'[ADMIN, COMMON]'">
                     <option disabled>Roles:</option>
                     <option selected value="ROLE_ADMIN">ADMIN</option>
                     <option selected value="ROLE_COMMON">COMMON</option>
                 </th:block>
-                <th:block th:case="'[ROLE_COMMON, ROLE_ADMIN]'">
+                <th:block th:case="'[COMMON, ADMIN]'">
                     <option disabled>Roles:</option>
                     <option selected value="ROLE_ADMIN">ADMIN</option>
                     <option selected value="ROLE_COMMON">COMMON</option>
                 </th:block>
-                <th:block th:case="'[ROLE_ADMIN]'">
+                <th:block th:case="'[ADMIN]'">
                     <option disabled>Roles:</option>
                     <option selected value="ROLE_ADMIN">ADMIN</option>
                     <option value="ROLE_COMMON">COMMON</option>
                 </th:block>
-                <th:block th:case="'[ROLE_COMMON]'">
+                <th:block th:case="'[COMMON]'">
                     <option disabled>Roles:</option>
                     <option value="ROLE_ADMIN">ADMIN</option>
                     <option selected value="ROLE_COMMON">COMMON</option>
