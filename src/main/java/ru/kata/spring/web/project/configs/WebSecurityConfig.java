@@ -45,22 +45,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .cors().disable()
-                .csrf().disable()
-                .authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/", "/css/**", "/js/**", "/webjars/**","/auth/login", "/error").permitAll()
                 .antMatchers("/user/**").hasAnyRole("COMMON","ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
+                .anyRequest().authenticated();
+
+        http.formLogin()
                 .successHandler(successUserHandler)
                 .loginPage("/auth/login")
                 .loginProcessingUrl("/process_login")
-                .failureUrl("/auth/login?error")
-                .and()
-                .logout()
+                .failureUrl("/auth/login?error");
+
+        http.logout()
                 .logoutSuccessUrl("/auth/login");
+
     }
 }

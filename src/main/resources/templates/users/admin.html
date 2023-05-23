@@ -14,25 +14,25 @@
         <h1 class="panel-title ml-3 mb-3">Admin panel</h1>
         <div class="container-fluid">
             <nav>
-                <div class="nav nav-tabs border-bottom" id="nav-tab" role="tablist">
-                    <a class="nav-link active" id="nav-users_table-link" data-toggle="tab" href="#nav-users_table"
+                <div class="nav nav-tabs border-bottom-0" id="nav-tab" role="tablist">
+                    <a class="nav-link active mb-auto" id="nav-users_table-link" data-toggle="tab" href="#nav-users_table"
                        role="tab" aria-controls="nav-users_table">Users table</a>
-                    <a class="nav-link" id="nav-user_form-link" data-toggle="tab" href="#nav-user_form"
+                    <a class="nav-link mb-auto" id="nav-user_form-link" data-toggle="tab" href="#nav-user_form"
                        role="tab" aria-controls="nav-user_form">New user</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-users_table" role="tabpanel">
+                <div class="tab-pane fade show active" id="nav-users_table">
                     <div class="row mr-0 ml-0 border border-bottom-0 border-top-right-radius-5">
-                        <h5 class="m-2 ml-3">All users</h5>
+                        <h5 class="m-3 ml-3">All users</h5>
                     </div>
                     <div class="row mr-0 ml-0 border bg-white pb-2">
                         <div th:replace="fragments/users-table"></div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="nav-user_form" role="tabpanel">
-                    <div class="row mr-0 ml-0 border">
-                        <h5 class="m-2 ml-3">Add new user</h5>
+                <div class="tab-pane fade" id="nav-user_form">
+                    <div class="row mr-0 ml-0 border border-bottom-0 border-top-radius-5">
+                        <h5 class="m-3 ml-3">Add new user</h5>
                     </div>
                     <div class="row mr-0 ml-0 border bg-white pb-2">
                         <div th:replace="fragments/user-addform"></div>
@@ -43,34 +43,15 @@
     </div>
 </div>
 
-<!--<div id="user-profile" class="modal fade">-->
-<!--    <div class="modal-dialog">-->
-<!--        <th:block th:if="${showUserProfile}">-->
-<!--            <div th:replace="fragments/user-form"></div>-->
-<!--        </th:block>-->
-<!--    </div>-->
-<!--</div>-->
+<div id="user-profile" class="modal fade">
+    <div class="modal-dialog">
+        <th:block th:if="false">
+            <div th:replace="fragments/user-form"></div>
+        </th:block>
+    </div>
+</div>
 
 <div th:replace="fragments/end-page-scripts"></div>
 
-<!--<script th:inline="javascript">-->
-<!--    $(document).ready(function () {-->
-<!--        let userExists = [[${showUserProfile}]];-->
-<!--        if (userExists) {-->
-<!--            $('#user-profile .modal-header h3').text('Edit User');-->
-<!--            $('#user-profile .modal-footer .submit').addClass('btn-primary');-->
-<!--            $('#user-profile #method').val("patch");-->
-<!--            $('#user-profile').modal("show");-->
-<!--        }-->
-
-<!--        let setNewUserFormTabpanel = [[${showNewUserForm}]];-->
-<!--        if (setNewUserFormTabpanel) {-->
-<!--            $('#nav-users_table-link').removeClass('active');-->
-<!--            $('#nav-users_table').removeClass('show').removeClass('active');-->
-<!--            $('#nav-user_form-link').addClass('active');-->
-<!--            $('#nav-user_form').addClass('show').addClass('active');-->
-<!--        }-->
-<!--    });-->
-<!--</script>-->
 </body>
 </html>

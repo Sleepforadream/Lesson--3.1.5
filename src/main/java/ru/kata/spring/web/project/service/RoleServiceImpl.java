@@ -1,6 +1,8 @@
 package ru.kata.spring.web.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.web.project.repository.RoleRepository;
@@ -27,26 +29,9 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role getRoleByName(String name) {
-        return roleRepository.findByRole(name);
-    }
-
-    @Override
-    public Set<Role> parseArrayToSet(String[] roleNames) {
-        return Arrays.stream(roleNames).map(this::getRoleByName).collect(Collectors.toSet());
-    }
-
-    @Override
     @Transactional
     public void addRole(Role role) {
         roleRepository.save(role);
-    }
-
-    @Override
-    @Transactional
-    public void updateRole(Long id, Role newSwitchRole) {
-        newSwitchRole.setId(id);
-        roleRepository.save(newSwitchRole);
     }
 
     @Override

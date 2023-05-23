@@ -1,7 +1,8 @@
 $(document).ready(function () {
+
     $('.edit-button').on('click', function (event) {
         event.preventDefault();
-        $('#user-profile').modal("show").find('.modal-dialog').load($(this).attr('href'), function(response, status, xhr) {
+        $('#user-profile').modal("show").find('.modal-dialog').load($(this).attr('href'), function (response, status, xhr) {
             if (xhr.status === 404) {
                 $(location).attr('href', '/admin');
             }
@@ -15,7 +16,7 @@ $(document).ready(function () {
 
     $('.delete-button').on('click', function (event) {
         event.preventDefault();
-        $('#user-profile').modal("show").find('.modal-dialog').load($(this).attr('href'), function(response, status, xhr) {
+        $('#user-profile').modal("show").find('.modal-dialog').load($(this).attr('href'), function (response, status, xhr) {
             if (xhr.status === 404) {
                 $(location).attr('href', '/admin');
             }
@@ -32,4 +33,5 @@ $(document).ready(function () {
             $('#user-profile #method').val("delete");
         });
     });
-});
+})
+;

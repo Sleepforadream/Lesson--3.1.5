@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User getUserByUsername(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Transactional
@@ -46,9 +46,9 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void updateUser(Long id, User newSwitchUser) {
-        newSwitchUser.setId(id);
-        userRepository.save(newSwitchUser);
+    public void updateUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     @Transactional
@@ -74,4 +74,5 @@ public class UserServiceImpl implements UserService {
     public Set<Role> getRollsByUserId(long userId) {
         return userRepository.getByIdFetchUser(userId).getRoles();
     }
+
 }

@@ -1,15 +1,13 @@
 package ru.kata.spring.web.project.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "roles")
-@Getter
-@Setter
+@Data
 public class Role implements GrantedAuthority {
     public Role() {}
     @Id
@@ -17,7 +15,7 @@ public class Role implements GrantedAuthority {
     private Long id;
 
     @Column(name = "role")
-    private String role; /*----------------------------> не пойму почему работает только когда поле названо role */
+    private String role;
 
     public Role(Long id) {
         this.id = id;

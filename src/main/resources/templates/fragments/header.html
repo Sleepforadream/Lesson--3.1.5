@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:with="lang=${#locale.language}" th:lang="${lang}">
+
 <header class="container-fluid d-flex flex-row align-items-center justify-content-between p-3 bg-dark text-white">
     <div class="header-title">
         <b sec:authentication="name"></b> with roles:
@@ -6,6 +11,8 @@
         </th:block>
     </div>
     <div class="header-logout">
-        <a class="text-white-50" th:href="@{/logout}">Logout</a>
+        <form th:action="@{/logout}" th:method="POST">
+            <input class="text-white-50 button-style-none" type="submit" value="Logout">
+        </form>
     </div>
 </header>

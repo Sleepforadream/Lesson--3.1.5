@@ -2,8 +2,20 @@ body {
     background-color: #ffffff;
 }
 
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+
+.is-invalid~.invalid-feedback {
+    display: block;
+}
+
 .bg-white {
-    background-color: #fcfcfc!important;
+    background-color: #fcfcfc !important;
 }
 
 .header-title {
@@ -14,18 +26,23 @@ body {
     font-size: 17px;
 }
 
+.button-style-none {
+    background-color: rgba(0,0,0,0);
+    border: 0;
+}
+
 .border-top-right-radius-5 {
-    border-top-right-radius: 5px!important;
+    border-top-right-radius: 5px !important;
 }
 
 .border-top-radius-5 {
-    border-top-left-radius: 5px!important;
-    border-top-right-radius: 5px!important;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
 }
 
 .border-bottom-radius-5 {
-    border-bottom-left-radius: 5px!important;
-    border-bottom-right-radius: 5px!important;
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
 }
 
 .width-navbar {
@@ -35,9 +52,9 @@ body {
 .navbar-button {
     margin-bottom: 1px;
     height: 44px;
-    border-top-left-radius: 0!important;
-    border-top-right-radius: 5px!important;
-    border-bottom-right-radius: 5px!important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
 }
 
 
@@ -50,12 +67,12 @@ body {
 }
 
 .btn-light {
-    background-color: #fcfcfc!important;
+    background-color: #fcfcfc !important;
     color: #007bff;
 }
 
 .panel-title {
-    font-size: 42px!important;
+    font-size: 42px !important;
 }
 
 .form-signin {
@@ -65,7 +82,6 @@ body {
 }
 
 .form-signin .form-signin-heading,
-
 .form-signin .checkbox {
     font-weight: 700;
 }
@@ -76,7 +92,7 @@ body {
 }
 
 .form-signin .checkbox {
-font-weight: 400;
+    font-weight: 400;
 }
 
 .form-signin .form-control {
