@@ -2,10 +2,7 @@ $(document).ready(function () {
 
     $('.edit-button').on('click', function (event) {
         event.preventDefault();
-        $('#user-profile').modal("show").find('.modal-dialog').load($(this).attr('href'), function (response, status, xhr) {
-            if (xhr.status === 404) {
-                $(location).attr('href', '/admin');
-            }
+        $('#user-profile').modal("show").find('.modal-dialog').load($(this).attr('href'), function () {
             $('#user-profile .modal-header h3').text('Edit User');
             let submit = $('#user-profile .modal-footer .submit');
             submit.text('Save');
@@ -16,10 +13,7 @@ $(document).ready(function () {
 
     $('.delete-button').on('click', function (event) {
         event.preventDefault();
-        $('#user-profile').modal("show").find('.modal-dialog').load($(this).attr('href'), function (response, status, xhr) {
-            if (xhr.status === 404) {
-                $(location).attr('href', '/admin');
-            }
+        $('#user-profile').modal("show").find('.modal-dialog').load($(this).attr('href'), function () {
             $('#user-profile .modal-header h3').text('Delete User');
             $('#user-profile #password-div').remove();
             $("#user-profile #firstName").prop("readonly", true);
@@ -33,5 +27,4 @@ $(document).ready(function () {
             $('#user-profile #method').val("delete");
         });
     });
-})
-;
+});

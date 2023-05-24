@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       th:with="lang=${#locale.language}" th:lang="${lang}">
 <head th:replace="fragments/head :: head">
     <title>All users</title>
@@ -44,11 +45,7 @@
 </div>
 
 <div id="user-profile" class="modal fade">
-    <div class="modal-dialog">
-        <th:block th:if="false">
-            <div th:replace="fragments/user-form"></div>
-        </th:block>
-    </div>
+    <div class="modal-dialog"></div>
 </div>
 
 <div th:replace="fragments/end-page-scripts"></div>
