@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByUsername(String email) {
-        return userRepository.findByEmail(email);
+        return userRepository.findUserByEmail(email);
     }
 
     @Transactional
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Long id) {
-        return userRepository.findById(id).get();
+        return userRepository.findUserByIdFetchRoles(id);
     }
 
     @Transactional
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userRepository.findAllUsersFetchRoles();
     }
 
     @Override
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Set<Role> getRollsByUserId(long userId) {
-        return userRepository.getByIdFetchUser(userId).getRoles();
+        return getUserById(userId).getRoles();
     }
 
 }
