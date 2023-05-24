@@ -24,6 +24,7 @@ public class UserController {
     public String viewUser(Principal principal, ModelMap model) {
         User user = userService.getUserByUsername(principal.getName());
         model.addAttribute("user", user);
+        model.addAttribute("roles", user.getRoles());
         return "fragments/user-selfinfo";
     }
 }

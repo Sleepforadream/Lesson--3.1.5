@@ -5,30 +5,30 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <form role="form" id="userprofile-form" th:action="@{/admin}" th:method="post" th:object="${user}">
+    <form role="form" id="userprofile-form" th:object="${user}" th:action="@{/admin}" th:method="post">
     <div class="modal-body">
         <div class="container col-6 text-center">
             <div class="form-group text-center">
                 <input id="method" type="hidden" name="_method" value="post">
                 <div>
                     <label for="id">ID</label>
-                    <input type="text" class="form-control" th:field="*{id}" id="id" readonly>
+                    <input type="text" class="form-control" th:field="${user.id}" id="id" readonly>
                 </div>
                 <div>
                     <label for="firstName">First name</label>
-                    <input type="text" class="form-control" th:field="*{name}" id="firstName">
+                    <input type="text" class="form-control" th:field="${user.name}" id="firstName">
                 </div>
                 <div>
                     <label for="lastName">Last name</label>
-                    <input type="text" class="form-control" th:field="*{surname}" id="lastName">
+                    <input type="text" class="form-control" th:field="${user.surname}" id="lastName">
                 </div>
                 <div>
                     <label for="age">Age</label>
-                    <input type="number" class="form-control" th:field="*{age}" id="age">
+                    <input type="number" class="form-control" th:field="${user.age}" id="age">
                 </div>
                 <div>
                     <label for="email">E-mail</label>
-                    <input type="text" class="form-control" th:field="*{email}" id="email" autocomplete="username">
+                    <input type="text" class="form-control" th:field="${user.email}" id="email" autocomplete="username">
                 </div>
                 <div id="password-div">
                     <label for="password">Password</label>
@@ -39,8 +39,9 @@
                     <select multiple class="form-control" id="roles" name="roles">
                         <option th:each="role : ${allRoles}"
                                 th:text="${role.role}"
-                                th:value="${role.id}">
-<!--                                th:selected="*{hasRole('__${role.id}__')}" -->
+                                th:value="${role.id}"
+                                th:selected="${user.getRoles().contains(role)}">
+                        </option>
                     </select>
                 </div>
             </div>

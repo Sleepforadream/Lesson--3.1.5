@@ -16,4 +16,5 @@ public class MvcConfig implements WebMvcConfigurer {
         templateResolver.setCheckExistence(true);
         return templateResolver;
     }
+
 }
