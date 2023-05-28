@@ -11,27 +11,5 @@
         <th scope="col">Delete</th>
     </tr>
     </thead>
-    <tbody>
-    <tr class="border-top bg-light" th:each="user, rowStat : ${users}"
-        th:classappend="${rowStat.count % 2 != 0 ? 'table-secondary' : 'table-light'}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.name}"></td>
-        <td th:text="${user.surname}"></td>
-        <td th:text="${user.age}"></td>
-        <td th:text="${user.username}"></td>
-        <td>
-            <th:block th:each="role : ${user.getRoles()}">
-                <span th:text="${role.toString()} + ' '"></span>
-            </th:block>
-        </td>
-        <td>
-            <a th:href="@{/admin/{id}/profile(id=${user.id})}"
-               class="btn btn-sm btn-info edit-button">Edit</a>
-        </td>
-        <td>
-            <a th:href="@{/admin/{id}/profile(id=${user.id})}"
-               class="btn btn-sm btn-danger delete-button">Delete</a>
-        </td>
-    </tr>
-    </tbody>
+    <tbody id="tbody"></tbody>
 </table>

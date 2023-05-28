@@ -27,16 +27,6 @@
                     </thead>
                     <tbody>
                     <tr class="border-top bg-light">
-                        <td th:text="${user.id}"></td>
-                        <td th:text="${user.name}"></td>
-                        <td th:text="${user.surname}"></td>
-                        <td th:text="${user.age}"></td>
-                        <td th:text="${user.username}"></td>
-                        <td>
-                            <th:block th:each="role : ${roles}">
-                                <span th:text="${role.toString()} + ' '"></span>
-                            </th:block>
-                        </td>
                     </tr>
                     </tbody>
                 </table>

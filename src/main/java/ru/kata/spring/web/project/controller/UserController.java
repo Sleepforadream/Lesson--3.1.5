@@ -1,30 +1,31 @@
 package ru.kata.spring.web.project.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import ru.kata.spring.web.project.dto.UserDto;
 import ru.kata.spring.web.project.model.User;
 import ru.kata.spring.web.project.service.UserService;
 
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/user")
+//@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
 
-    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping()
-    public String viewUser(Principal principal, ModelMap model) {
+    @CrossOrigin(origins = "*")
+    @GetMapping(path = "/api/auth")
+    public ResponseEntity<User> getAuthUser(@CurrentSecurityContext(expression = "authentication") Principal principal) {
         User user = userService.getUserByUsername(principal.getName());
-        model.addAttribute("user", user);
-        model.addAttribute("roles", user.getRoles());
-        return "fragments/user-selfinfo";
+        return ResponseEntity.ok(user);
     }
 }

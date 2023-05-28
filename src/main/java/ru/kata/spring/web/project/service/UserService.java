@@ -2,8 +2,7 @@ package ru.kata.spring.web.project.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ru.kata.spring.web.project.dto.UserDto;
 import ru.kata.spring.web.project.model.Role;
 import ru.kata.spring.web.project.model.User;
 
@@ -16,15 +15,17 @@ public interface UserService extends UserDetailsService {
 
     User getUserByUsername(String username);
 
-    void addUser(User user);
+    void saveUser(User user);
 
     User getUserById(Long userId);
-
-    void updateUser(User user);
 
     void deleteUser(Long userId);
 
     UserDetails loadUserByUsername(String username);
 
     Set<Role> getRollsByUserId(long roleId);
+
+    User convertToUser(UserDto userDto);
+
+    UserDto convertToUserDto(User user);
 }

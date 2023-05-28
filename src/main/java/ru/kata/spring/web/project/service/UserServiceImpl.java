@@ -1,17 +1,20 @@
 package ru.kata.spring.web.project.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kata.spring.web.project.dto.UserDto;
 import ru.kata.spring.web.project.repository.RoleRepository;
 import ru.kata.spring.web.project.repository.UserRepository;
 import ru.kata.spring.web.project.model.Role;
 import ru.kata.spring.web.project.model.User;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -34,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void addUser(User user) {
+    public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
@@ -42,13 +45,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Long id) {
         return userRepository.findUserByIdFetchRoles(id);
-    }
-
-    @Transactional
-    @Override
-    public void updateUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
     }
 
     @Transactional
@@ -74,5 +70,18 @@ public class UserServiceImpl implements UserService {
     public Set<Role> getRollsByUserId(long userId) {
         return getUserById(userId).getRoles();
     }
+
+    @Override
+    public User convertToUser(UserDto userDto) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(userDto, User.class);
+    }
+
+    @Override
+    public UserDto convertToUserDto(User user) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(user, UserDto.class);
+    }
+
 
 }
