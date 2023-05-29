@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import ru.kata.spring.web.project.service.UserService;
 
@@ -49,22 +53,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable().authorizeRequests()
 
-                .antMatchers("/", "/css/**", "/js/**", "/webjars/**","/auth/login", "/error").permitAll()
+                .antMatchers("/", "/css/**", "/js/**", "/webjars/**","/login", "/error").permitAll()
                 .antMatchers("/user/**").hasAnyRole("COMMON","ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/api/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
-//                .anyRequest().permitAll();
 
-        http.formLogin()
-                .loginPage("/auth/login")
+        http    .formLogin().permitAll()
+                .loginPage("/login")
                 .loginProcessingUrl("/process_login")
-                .failureUrl("/auth/login?error")
+                .failureUrl("/login?error")
                 .successHandler(successUserHandler);
 
         http.logout()
-                .logoutSuccessUrl("/auth/login");
+                .logoutSuccessUrl("/login");
 
     }
 

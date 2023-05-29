@@ -19,7 +19,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("api/admin")
+@CrossOrigin(origins = "http://localhost:63342")
 public class AdminController {
 
     private final UserService userService;
@@ -31,7 +32,6 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @CrossOrigin(origins = "*")
     @GetMapping({"", "/users"})
     public ResponseEntity<List<UserDto>> viewAllUsers() {
         List<User> users = userService.getAllUsers();
@@ -39,7 +39,6 @@ public class AdminController {
         return new ResponseEntity<>(usersDto, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "*")
     @GetMapping("/users/{id}")
     public ResponseEntity<UserDto> viewUserProfile(@PathVariable Long id) {
         UserDto userDto = userService.convertToUserDto(userService.getUserById(id));
@@ -47,7 +46,6 @@ public class AdminController {
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "*")
     @PostMapping("/users")
     public ResponseEntity<HttpStatus> createUser(@Valid @RequestBody UserDto userDto, BindingResult bindingResult) {
         throwErrorFromValid(bindingResult);
@@ -60,7 +58,6 @@ public class AdminController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "*")
     @PatchMapping("/users")
     public ResponseEntity<HttpStatus> updateUser(@Valid @RequestBody UserDto userDto, BindingResult bindingResult) {
         throwErrorFromValid(bindingResult);
@@ -68,7 +65,6 @@ public class AdminController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "*")
     @DeleteMapping("/users/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable Long id) {
         User user = userService.getUserById(id);

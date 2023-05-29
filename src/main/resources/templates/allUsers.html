@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-      <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Spring-CRUD-Project</title>
-    
-        <link rel="stylesheet" href="../static/css/bootstrap.css">
-        <link rel="stylesheet" href="../static/css/styles.css">
-    </head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Spring-CRUD-Project</title>
+
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
 <body>
 
 <header class="container-fluid d-flex flex-row align-items-center justify-content-between p-3 bg-dark text-white">
-    <div class="header-title">
-        <div>with roles:</div>
+    <div class="header-title" id="header-title">
+
     </div>
     <div class="header-logout">
-        <form action="logout" method="POST">
+        <form action="/logout" method="POST">
             <input class="text-white-50 button-style-none" type="submit" value="Logout">
         </form>
     </div>
@@ -27,12 +27,14 @@
 
     <div class="bg-white width-navbar">
         <nav class="btn-group-vertical mt-3 mb-3">
-            <a type="button" class="btn pr-5 pt-2 text-left font-size-navbar navbar-button">Admin</a>
-            <a type="button" class="btn pr-5 pt-2 text-left font-size-navbar navbar-button">User</a>
+            <a type="button" class="btn pr-5 pt-2 text-left font-size-navbar navbar-button"
+               id="navbar-admin-button">Admin</a>
+            <a type="button" class="btn pr-5 pt-2 text-left font-size-navbar navbar-button"
+               id="navbar-user-button">User</a>
         </nav>
     </div>
 
-    <div class="flex-grow-1 bg-light p-3">
+    <div class="flex-grow-1 fade active show bg-light p-3" id="admin-page">
         <h1 class="panel-title ml-3 mb-3">Admin panel</h1>
         <div class="container-fluid">
             <nav>
@@ -71,48 +73,50 @@
                         <h5 class="m-3 ml-3">Add new user</h5>
                     </div>
                     <div class="row mr-0 ml-0 border bg-white pb-2">
-                        
+
                         <div class="container col-4 form-group text-center">
-                            <form role="form" id="user-add_form" th:action="@{/admin}" th:method="post" th:object="${user}">
-                            <div class="mt-3">
-                                <label for="newName">First name</label>
-                                <input th:field="${user.name}"
-                                       type="text" class="form-control" placeholder="Enter name"
-                                       id="newName">
-                            </div>
-                            <div class="mt-2">
-                                <label for="newSurname">Last name</label>
-                                <input th:field="${user.surname}"
-                                       type="text" class="form-control" placeholder="Enter surname" id="newSurname">
-                            </div>
-                            <div class="mt-2">
-                                <label for="newAge">Age</label>
-                                <input th:field="${user.age}"
-                                       type="number" class="form-control" placeholder="Age"
-                                       id="newAge">
-                            </div>
-                            <div class="mt-2">
-                                <label for="newEmail">E-mail</label>
-                                <input th:field="${user.email}"
-                                       type="text" class="form-control" placeholder="Enter e-mail"
-                                       id="newEmail" autocomplete="username">
-                            </div>
-                            <div class="mt-2" id="password-div">
-                                <label for="newPassword">Password</label>
-                                <input th:field="${user.password}"
-                                       type="password" class="form-control" placeholder="Enter password"
-                                       id="newPassword" name="password" autocomplete="current-password">
-                            </div>
-                            <div class="mt-2">
-                                <label for="newRoles" >Role</label>
-                                <select multiple class="form-control" id="newRoles" name="roles">
-                                    <option value="1">ADMIN</option>
-                                    <option value="2">COMMON</option>
-                                </select>
-                            </div>
-                            <div>
-                                <button type="submit" id="addNewUserButton" class="btn btn-success mt-3">Add new User</button>
-                            </div>
+                            <form role="form" id="user-add_form">
+                                <div class="mt-3">
+                                    <label for="newName">First name</label>
+                                    <input name="newName"
+                                           type="text" class="form-control" placeholder="Enter name"
+                                           id="newName">
+                                </div>
+                                <div class="mt-2">
+                                    <label for="newSurname">Last name</label>
+                                    <input name="newSurname"
+                                           type="text" class="form-control" placeholder="Enter surname" id="newSurname">
+                                </div>
+                                <div class="mt-2">
+                                    <label for="newAge">Age</label>
+                                    <input name="newAge"
+                                           type="number" class="form-control" placeholder="Age"
+                                           id="newAge">
+                                </div>
+                                <div class="mt-2">
+                                    <label for="newEmail">E-mail</label>
+                                    <input name="newEmail"
+                                           type="text" class="form-control" placeholder="Enter e-mail"
+                                           id="newEmail" autocomplete="username">
+                                </div>
+                                <div class="mt-2" id="password-div">
+                                    <label for="newPassword">Password</label>
+                                    <input name="newPassword"
+                                           type="password" class="form-control" placeholder="Enter password"
+                                           id="newPassword" autocomplete="current-password">
+                                </div>
+                                <div class="mt-2">
+                                    <label for="newRoles">Role</label>
+                                    <select multiple class="form-control" id="newRoles" name="newRoles">
+                                        <option value="1">ADMIN</option>
+                                        <option value="2">COMMON</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <button type="submit" id="addNewUserButton" class="btn btn-success mt-3">Add new
+                                        User
+                                    </button>
+                                </div>
                             </form>
                         </div>
 
@@ -121,13 +125,92 @@
             </div>
         </div>
     </div>
+
+    <div class="flex-grow-1 fade deactive hide bg-light px-4 py-3" id="user-page">
+        <h1 class="panel-title">User information-page</h1>
+        <div class="container-fluid">
+            <div class="row border border-bottom-0 border-top-radius-5">
+                <h5 class="m-3 ml-3">About user</h5>
+            </div>
+            <div class="row border bg-white pb-2 border-bottom-radius-5">
+                <table class="table table-borderless m-3">
+                    <thead>
+                    <tr class="border-top">
+                        <th scope="col">ID</th>
+                        <th scope="col">First name</th>
+                        <th scope="col">Last name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Roles</th>
+                    </tr>
+                    </thead>
+                    <tbody id="current-user-table" >
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<div id="user-profile" class="modal fade">
-    <div class="modal-dialog"></div>
+<div id="user-edit-delete" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Edit user</h3>
+                <button type="button" id="close-x" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form role="form" id="userprofile-form">
+                <div class="modal-body">
+                    <div class="container col-6 text-center">
+                        <div class="form-group text-center">
+                            <input id="method" type="hidden" name="_method" value="post">
+                            <div>
+                                <label for="id">ID</label>
+                                <input type="text" class="form-control" id="id" readonly>
+                            </div>
+                            <div>
+                                <label for="firstName">First name</label>
+                                <input type="text" class="form-control" id="firstName">
+                            </div>
+                            <div>
+                                <label for="lastName">Last name</label>
+                                <input type="text" class="form-control" id="lastName">
+                            </div>
+                            <div>
+                                <label for="age">Age</label>
+                                <input type="number" class="form-control" id="age">
+                            </div>
+                            <div>
+                                <label for="email">E-mail</label>
+                                <input type="text" class="form-control" id="email" autocomplete="username">
+                            </div>
+                            <div id="edit-password-div">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                       autocomplete="current-password">
+                            </div>
+                            <div>
+                                <label for="roles">Role</label>
+                                <select multiple class="form-control" id="roles" name="roles">
+                                    <option id="ADMIN" value="1">ADMIN</option>
+                                    <option id="COMMON" value="2">COMMON</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close-button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="save-button" class="btn">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
-<script type="text/javascript" src="../static/js/jquery.min.js"></script>
 <script src="../static/js/script.js"></script>
 
 </body>

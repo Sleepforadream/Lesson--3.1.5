@@ -2,7 +2,6 @@ package ru.kata.spring.web.project.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -15,9 +14,8 @@ public class MvcConfig implements WebMvcConfigurer {
 
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addRedirectViewController("/","/login");
-        registry.addViewController("/login").setViewName("auth/login");
-        registry.addViewController("/index").setViewName("allUsers");
-        registry.addViewController("/user").setViewName("fragments/userSelfInfo");
+        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/admin/users").setViewName("allUsers");
     }
 
     @Bean
