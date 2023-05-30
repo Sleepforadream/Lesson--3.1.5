@@ -270,7 +270,6 @@ window.onload = function () {
         function addEventListenerOnce(element, event, fn) {
             function onceFn(event) {
                 element.removeEventListener(event.type, onceFn);
-                element.removeEventListener(event.type, onceFn);
                 fn(event);
             }
             element.addEventListener(event, onceFn);
@@ -292,7 +291,8 @@ window.onload = function () {
                 fieldRoles.disabled = false;
 
                 button.classList.add("btn-primary");
-                addEventListenerOnce(button,"click", editUser)
+
+                button.addEventListener("click", editUser);
             } else {
                 button.classList.remove("btn-primary");
 
@@ -305,7 +305,8 @@ window.onload = function () {
                 fieldEmail.readOnly = true;
                 fieldPassword.readOnly = true;
                 fieldRoles.disabled = true;
-                addEventListenerOnce(button,"click", deleteUser)
+
+                button.addEventListener("click", deleteUser);
             }
         }
 
@@ -365,8 +366,13 @@ window.onload = function () {
         }
 
         function closeModal() {
+            let button = document.getElementById("save-button");
+            button.removeEventListener("click", editUser);
+            button.removeEventListener("click", deleteUser);
+
             document.getElementById('backdrop').classList.remove("show")
             modalDialog.classList.remove('show');
+
             setTimeout(function () {
                 document.body.classList.remove("modal-open");
                 modalDialog.classList.remove('active-modal');
