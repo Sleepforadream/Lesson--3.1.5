@@ -6,10 +6,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import ru.kata.spring.web.project.exceptions.JSONBody.UserIncorrectData;
-import ru.kata.spring.web.project.exceptions.entity.NoSuchUserException;
-import ru.kata.spring.web.project.exceptions.entity.UserAlreadyExistException;
-
-import java.util.Locale;
+import ru.kata.spring.web.project.exceptions.NoSuchUserException;
+import ru.kata.spring.web.project.exceptions.UserAlreadyExistException;
 
 @ControllerAdvice
 public class UserExceptionHandler {

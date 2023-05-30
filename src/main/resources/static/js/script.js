@@ -15,11 +15,12 @@ window.onload = function () {
     let userPage = document.getElementById('user-page');
     let adminPage = document.getElementById('admin-page');
     let modalDialog = document.getElementById('user-edit-delete');
-    let userEditForm = document.getElementById('userprofile-form');
+    let mainContainer = document.getElementById('main-container');
 
-    getAdminPage();
-    getUserPage()
-    getHeaderInfo();
+    getInfo();
+    setTimeout(function () {
+        mainContainer.classList.add("container-visibly");
+    }, 100);
 
     usersTableButton.addEventListener('click', getHomePanel);
     newUserButton.addEventListener('click', getNewUserPanel);
@@ -56,7 +57,7 @@ window.onload = function () {
         usersTableBody.classList.remove('active');
     }
 
-    // активируем вкладку с таблицей со всеми юзерами
+    // активируем вкладку админа
     async function getAdminPanel() {
         navbarAdminButton.classList.add('btn-primary');
         navbarUserButton.classList.remove('btn-primary');
@@ -76,7 +77,7 @@ window.onload = function () {
         }, 100);
     }
 
-    // активируем вкладку создания нового юзера
+    // активируем вкладку ткущего юзера
     async function getUserPanel() {
         navbarAdminButton.classList.remove('btn-primary');
         navbarUserButton.classList.add('btn-primary');
@@ -110,7 +111,7 @@ window.onload = function () {
     // получаем список всех юзеров на страницу, каждую вторую строчку немного затемняем + убираем ROLE_ из названия роли
     function loadTableData(listAllUser) {
         const tableElements = document.querySelectorAll("[name='table-users-row']");
-        tableElements.forEach(function(element){
+        tableElements.forEach(function (element) {
             element.remove();
         });
         let tableBody = document.getElementById('tbody');
@@ -178,7 +179,7 @@ window.onload = function () {
     }
 
     // асинхронно с фетчем загружаем текущего юзера на страницу
-    async function getHeaderInfo() {
+    async function getInfo() {
         let page = await fetch(urlAuth);
         if (page.ok) {
             let currentUser = await page.json();
@@ -188,7 +189,7 @@ window.onload = function () {
         }
     }
 
-    // получаем текущего юзера на страницу, + убираем ROLE_ из названия роли
+    // получаем текущего юзера на страницу, в зависимости от роли загружаем данные + убираем ROLE_ из названия роли
     function loadCurrentUserInfo(currentUser) {
         let headerBody = document.getElementById('header-title');
         let newHeaderInfoHtml = '';
@@ -196,10 +197,14 @@ window.onload = function () {
         for (let role of currentUser.roles) {
             roles.push(" " + role.role.replace("ROLE_", ""))
         }
-        if (roles.includes(" ADMIN")) {
+        if (roles.includes(" ADMIN") || roles.includes(" ADMIN, COMMON") || roles.includes(" COMMON, ADMIN")) {
+            getUserPage();
+            getAdminPage();
             getAdminPanel();
         } else {
+            getUserPage();
             getUserPanel();
+            removeAdminInfo();
         }
         newHeaderInfoHtml += `<div>${currentUser.username} with roles ${roles}</div>`
         headerBody.innerHTML = newHeaderInfoHtml;
@@ -214,6 +219,13 @@ window.onload = function () {
         } else {
             alert(`Error, ${page.status}`)
         }
+    }
+
+    // функция для удаления данных, доступных только админу
+    function removeAdminInfo() {
+        adminPage.remove();
+        modalDialog.remove();
+        navbarAdminButton.remove();
     }
 
     // получаем текущего юзера со всеми полями на личную страницу, + убираем ROLE_ из названия роли
@@ -236,7 +248,7 @@ window.onload = function () {
         userTable.innerHTML = newCurrentTableUserHtml;
     }
 
-    // отправляем данные с формы на сервер и создаём нового юзера, обновляем информацию о юзерах и переходим на главную
+    // функция вызова модального окна и получения данных для полей формы из выбранного юзера
     async function getModalPanel(event) {
         event.preventDefault();
         let strTarget = event.currentTarget.id.toString();
@@ -256,6 +268,7 @@ window.onload = function () {
         openModal();
         await getUserInfo();
 
+        //получение данных текущего юзера
         async function getUserInfo() {
             let page = await fetch(url);
             if (page.ok) {
@@ -267,6 +280,7 @@ window.onload = function () {
             }
         }
 
+        //функция для добавления только одного "верхнего" слушателя
         function addEventListenerOnce(element, event, fn) {
             function onceFn(event) {
                 element.removeEventListener(event.type, onceFn);
@@ -275,7 +289,8 @@ window.onload = function () {
             element.addEventListener(event, onceFn);
         }
 
-        function changeAppointmentOfModal (appointment) {
+        //функция для изменения модального окна от типа кнопки (удаление или изменение пользователя)
+        function changeAppointmentOfModal(appointment) {
             let button = document.getElementById("save-button");
             let modalTitle = document.getElementById("modal-title");
 
@@ -310,6 +325,7 @@ window.onload = function () {
             }
         }
 
+        //функция для загрузки данных выбранного пользователя в модальное окно
         function loadEditTable(listAllUser, userId) {
             let currentUser;
             for (let user of listAllUser) {
@@ -341,12 +357,14 @@ window.onload = function () {
             }
         }
 
+        //функция для закрытия модального окна при нажатии на область вне формы
         function onModalBackdropClick(event) {
             if (event.target === this) {
                 closeModal();
             }
         }
 
+        //функция для получения модального окна (назначаем кнопкам слушателей для его закрытия, добавление тёмного фона)
         function openModal() {
             modalDialog.classList.add('active-modal');
             const backdrop = document.createElement("div");
@@ -362,9 +380,10 @@ window.onload = function () {
             }, 10);
             document.getElementById("close-button").addEventListener("click", closeModal)
             document.getElementById("close-x").addEventListener("click", closeModal)
-            addEventListenerOnce(modalDialog,"click", onModalBackdropClick);
+            addEventListenerOnce(modalDialog, "click", onModalBackdropClick);
         }
 
+        //функция для закрытия модального окна (удаление тёмного фона)
         function closeModal() {
             let button = document.getElementById("save-button");
             button.removeEventListener("click", editUser);
@@ -383,6 +402,7 @@ window.onload = function () {
             }, 300);
         }
 
+        //функция для отправления новой информации о редактируемом пользователе на сервер для его изменения
         async function editUser(event) {
             event.preventDefault();
             let listOfRole = [];
@@ -414,6 +434,7 @@ window.onload = function () {
             });
         }
 
+        //функция для отправления информации об удаляемом пользователе на сервер для его удаления
         async function deleteUser(event) {
             event.preventDefault();
             let deleteInfo = {
@@ -428,7 +449,7 @@ window.onload = function () {
                     password: fieldPassword.value,
                 })
             }
-            await fetch(url + "/" +  fieldId.value, deleteInfo).then(() => {
+            await fetch(url + "/" + fieldId.value, deleteInfo).then(() => {
                 closeModal();
                 getAdminPage();
                 getHomePanel();

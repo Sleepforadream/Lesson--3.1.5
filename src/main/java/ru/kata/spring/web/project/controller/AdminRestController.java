@@ -8,9 +8,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.web.project.dto.UserDto;
-import ru.kata.spring.web.project.exceptions.entity.NoSuchUserException;
-import ru.kata.spring.web.project.exceptions.entity.UserAlreadyExistException;
-import ru.kata.spring.web.project.exceptions.entity.UserNotSaveException;
+import ru.kata.spring.web.project.exceptions.NoSuchUserException;
+import ru.kata.spring.web.project.exceptions.UserAlreadyExistException;
+import ru.kata.spring.web.project.exceptions.UserNotSaveException;
 import ru.kata.spring.web.project.model.User;
 import ru.kata.spring.web.project.service.RoleService;
 import ru.kata.spring.web.project.service.UserService;
@@ -21,13 +21,13 @@ import java.util.List;
 @RestController
 @RequestMapping("api/admin")
 @CrossOrigin(origins = "http://localhost:63342")
-public class AdminController {
+public class AdminRestController {
 
     private final UserService userService;
     private final RoleService roleService;
 
     @Autowired
-    public AdminController(UserService userService, RoleService roleService) {
+    public AdminRestController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }

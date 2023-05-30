@@ -1,4 +1,4 @@
-package ru.kata.spring.web.project.exceptions.entity;
+package ru.kata.spring.web.project.exceptions;
 
 public class NoSuchUserException extends RuntimeException {
     public NoSuchUserException(String message) {

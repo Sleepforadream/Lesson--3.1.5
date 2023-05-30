@@ -12,11 +12,11 @@ import java.security.Principal;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:63342")
-public class UserController {
+public class CurrentUserRestController {
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public CurrentUserRestController(UserService userService) {
         this.userService = userService;
     }
 
