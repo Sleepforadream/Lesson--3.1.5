@@ -8,13 +8,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.web.project.dto.UserDto;
-import ru.kata.spring.web.project.repository.RoleRepository;
-import ru.kata.spring.web.project.repository.UserRepository;
 import ru.kata.spring.web.project.model.Role;
 import ru.kata.spring.web.project.model.User;
+import ru.kata.spring.web.project.repository.RoleRepository;
+import ru.kata.spring.web.project.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -82,6 +81,4 @@ public class UserServiceImpl implements UserService {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(user, UserDto.class);
     }
-
-
 }

@@ -2,6 +2,7 @@
 
 const url = "http://localhost:7074/api/admin/users"
 const urlAuth = "http://localhost:7074/api/auth"
+const csrfToken = document.cookie.replace(/(?:(?:^|.;\s)XSRF-TOKEN\s=\s([^;]).$)|^.*$/, '$1');
 
 window.onload = function () {
 
@@ -161,7 +162,7 @@ window.onload = function () {
         }
         let postInfo = {
             method: 'POST',
-            headers: {"Content-Type": "application/json"},
+            headers: {"Content-Type": "application/json", 'X-XSRF-TOKEN': csrfToken},
             body: JSON.stringify({
                 name: userAddForm.newName.value,
                 surname: userAddForm.newSurname.value,
@@ -416,7 +417,7 @@ window.onload = function () {
             }
             let patchInfo = {
                 method: 'PATCH',
-                headers: {"Content-Type": "application/json"},
+                headers: {"Content-Type": "application/json", 'X-XSRF-TOKEN': csrfToken},
                 body: JSON.stringify({
                     id: fieldId.value,
                     name: fieldFirstName.value,
@@ -439,7 +440,7 @@ window.onload = function () {
             event.preventDefault();
             let deleteInfo = {
                 method: 'DELETE',
-                headers: {"Content-Type": "application/json"},
+                headers: {"Content-Type": "application/json", 'X-XSRF-TOKEN': csrfToken},
                 body: JSON.stringify({
                     id: fieldId.value,
                     name: fieldFirstName.value,
